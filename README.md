@@ -6,9 +6,11 @@ Built based on concepts from this: https://github.com/VividCortex/heroku-buildpa
 
 To use, you should set two environment variables:
 
-`DATABASE\_URL` - A comma separated list of database urls.
-`VC\_API\_TOKEN` - Your Vivid Cortex API Token. You can get this by
+`DATABASE_URL` - A comma separated list of database urls.
+
+`VC_API_TOKEN` - Your Vivid Cortex API Token. You can get this by
 doing the following:
+
 
 ```
 In your account from the Hosts page add a new host by clicking the
