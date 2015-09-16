@@ -8,8 +8,8 @@ export VC_LOG_DIR=$VC_HOME/logs
 export VC_LOCK_DIR=$VC_HOME/lock
 export VC_AGENT_INSTALL_DIR=$VC_HOME/bin
 export VC_DRV_MANUAL_HOST_URI="$DATABASE_URL"
-export VC_HOSTNAME="$(hostname)"
+export VC_HOSTNAME="${VC_HOSTNAME:-$(hostname)}"
 
 export PATH=$PATH:$VC_AGENT_INSTALL_DIR
 
-${VC_AGENT_INSTALL_DIR}/vc-agent-007 --foreground --forbid-restarts --log-type stderr
+exec ${VC_AGENT_INSTALL_DIR}/vc-agent-007 --foreground --forbid-restarts --log-type stderr
