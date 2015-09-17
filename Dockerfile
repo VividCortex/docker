@@ -1,7 +1,7 @@
 FROM phusion/baseimage:0.9.17
-MAINTAINER Michael Barrett <mike@remind101.com>
+MAINTAINER VividCortex <containers@vividcortex.com>
 WORKDIR /
-LABEL app vivid-cortex
+LABEL app vividcortex
 
 ENV VC_HOME=/vc
 
