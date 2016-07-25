@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export VC_007="https://download.vividcortex.com/linux/x86_64/current/vc-agent-007"
+export VC_007="https://download.vividcortex.com/linux-static/x86_64/current/vc-agent-007"
 export VC_HOME=/vc
 export VC_PID_DIR=$VC_HOME
 export VC_RUN_DIR=$VC_HOME
