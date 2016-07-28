@@ -4,7 +4,7 @@ rm -f vividcortex.tar.xz
 rm -rf vcimage.tmptmptmp
 mkdir vcimage.tmptmptmp
 cd vcimage.tmptmptmp
-mkdir -p usr/local/bin var/{lock,log,run}/vividcortex etc/vividcortex usr/local/bin dev proc sys tmp
+mkdir -p usr/local/bin var/{lock,log,run}/vividcortex etc/vividcortex dev proc sys tmp
 cat <<'_EOF_'>etc/vividcortex/global.conf
 {
     "log-max-backups": "1",
