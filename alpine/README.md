@@ -24,7 +24,7 @@ Now create and start a container for your RDS host:
 
 where:
 * `VC_HOSTNAME`, optional, is a host name to use instead of Docker's random hex one.
-* `VC_DRV_MANUAL_HOST_URI`, optional, is a comma-separated list of database URLs to monitor.  You can still add hosts using VividCortex's web app.  Database URL format:
+* `VC_DRV_MANUAL_HOST_URI`, optional, is a comma-separated list of database URLs to monitor. You can still add hosts using VividCortex's web app. Database URL format:
 
 	```
 	<schema>://[<user>[:<password>]@]<host>:<port>[/<db>][?key1=value1&...]
