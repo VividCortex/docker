@@ -16,6 +16,7 @@ _EOF_
 cat <<'_EOF_'>etc/vividcortex/vc-agent-007.conf
 {
     "discover-containers": "false",
+    "host-discovery-limit": "0",
     "forbid-restarts": "true",
     "foreground": "true"
 }
