@@ -1,6 +1,20 @@
 #!/bin/sh
 
-export VC_007="https://download.vividcortex.com/linux-static/x86_64/current/vc-agent-007"
+make_credentials () {
+  if [ -z $AWS_ACCESS_KEY_ID ]; then
+    echo "AWS_ACCESS_KEY_ID is not set in the environment variables. AWS credentials will not be created."
+  elif [ -z $AWS_SECRET_ACCESS_KEY ]; then
+    echo "AWS_SECRET_ACCESS_KEY is not set in the environment variables. AWS credentials will not be created."
+  else
+    echo "Creating AWS credentials file."
+    mkdir $HOME/.aws
+    echo "[default]" >> $HOME/.aws/credentials
+    echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> $HOME/.aws/credentials
+    echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> $HOME/.aws/credentials
+  fi
+}
+
+export VC_007="https://download.vividcortex.com/linux/x86_64/current/vc-agent-007"
 export VC_HOME=/vc
 export VC_PID_DIR=$VC_HOME
 export VC_RUN_DIR=$VC_HOME
@@ -9,6 +23,8 @@ export VC_LOCK_DIR=$VC_HOME/lock
 export VC_AGENT_INSTALL_DIR=$VC_HOME/bin
 export VC_DRV_MANUAL_HOST_URI="$DATABASE_URL"
 export VC_HOSTNAME="${VC_HOSTNAME:-$(hostname)}"
+
+[ -f $HOME/.aws/credentials ] || make_credentials
 
 export PATH=$PATH:$VC_AGENT_INSTALL_DIR
 
