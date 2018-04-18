@@ -22,7 +22,7 @@ ENTRYPOINT ["/usr/local/bin/vc-agent-007","-foreground","-forbid-restarts"]
 # cap logs
 
 RUN test -n "${VC_API_TOKEN}" && \
-    apk add --no-cache openssl && \
+    apk update && apk add --no-cache openssl ca-certificates wget && \
     rm -f install && \
     wget https://download.vividcortex.com/install && \
     sh install --token=${VC_API_TOKEN} --batch --init=None --static --proxy=dyn --skip-certs && \
