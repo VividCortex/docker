@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.8
 MAINTAINER VividCortex <containers@vividcortex.com>
 LABEL app=vividcortex
 
@@ -25,7 +25,7 @@ RUN test -n "${VC_API_TOKEN}" && \
     apk update && apk add --no-cache openssl ca-certificates wget && \
     rm -f install && \
     wget https://download.vividcortex.com/install && \
-    sh install --token=${VC_API_TOKEN} --batch --init=None --static --proxy=dyn --skip-certs && \
+    sh install --token=${VC_API_TOKEN} --batch --init=None --static --proxy=dyn && \
     rm -f install && \
     sed '1 a "log-max-size":"5",' /etc/vividcortex/global.conf > /etc/vividcortex/tempconf && \
     sed '1 a "log-max-backups":"1",' /etc/vividcortex/tempconf > /etc/vividcortex/global.conf && \
