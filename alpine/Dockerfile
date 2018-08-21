@@ -7,7 +7,7 @@ WORKDIR /
 ADD ./run.sh /
 
 RUN chmod +x /run.sh && \
-    apk update && apk add --no-cache openssl ca-certificates wget su-exec && \
+    apk update && apk add --no-cache openssl ca-certificates wget && \
     rm -f install && \
     wget https://download.vividcortex.com/install
 
