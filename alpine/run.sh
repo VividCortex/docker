@@ -14,4 +14,4 @@ rm -f /etc/vividcortex/tempconf && chmod 600 /etc/vividcortex/global.conf
 
 # Start the Vividcortex monitoring agent
 echo "Starting the VC agent."
-/usr/local/bin/vc-agent-007 -foreground -forbid-restarts
+/usr/local/bin/vc-agent-007 $@
