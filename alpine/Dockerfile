@@ -12,6 +12,7 @@ LABEL app=vividcortex
 ## REMOVE CONTAINER AND IMAGE: docker rm --force vividcortex; docker rmi --force vcimage
 
 ARG VC_API_TOKEN
+ARG VC_ENABLE_RDS_OFFHOST
 
 WORKDIR /
 ENTRYPOINT ["/usr/local/bin/vc-agent-007","-foreground","-forbid-restarts"]
@@ -29,4 +30,6 @@ RUN test -n "${VC_API_TOKEN}" && \
     rm -f install && \
     sed '1 a "log-max-size":"5",' /etc/vividcortex/global.conf > /etc/vividcortex/tempconf && \
     sed '1 a "log-max-backups":"1",' /etc/vividcortex/tempconf > /etc/vividcortex/global.conf && \
-    rm -f /etc/vividcortex/tempconf && chmod 600 /etc/vividcortex/global.conf
+    rm -f /etc/vividcortex/tempconf && chmod 600 /etc/vividcortex/global.conf && \
+    test -n "${VC_ENABLE_RDS_OFFHOST}" && \
+    printf '{\n  "force-offhost-digests": "true",\n  "force-offhost-samples": "true"\n}\n' >/etc/vividcortex/vc-mysql-metrics.conf || true

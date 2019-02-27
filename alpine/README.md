@@ -8,6 +8,20 @@ To use, you should build a image for your environment:
 	docker build --force-rm --build-arg VC_API_TOKEN=xxxxxxxxxxxxxxxx -t vcimage \
 	  https://raw.githubusercontent.com/VividCortex/docker/master/alpine/Dockerfile
 
+Optional build-args:
+
+* `VC_ENABLE_RDS_OFFHOST`, for AWS RDS DB instances, let the VividCortex agent
+enable digests and query sampling since one cannot set relevant parameters in
+`my.cnf` and it is not exposed in Parameter Groups. See [VividCortex docs][1].
+Usage: `--build-arg VC_ENABLE_RDS_OFFHOST=1`. Creates
+`/etc/vividcortex/vc-mysql-metrics.conf`:
+
+      {
+        "force-offhost-digests": "true",
+        "force-offhost-samples": "true"
+      }
+
+
 You can get your API token from the host wizard in VividCortex as follows:
 In your account from the Hosts page add a new host by clicking the "Add New
 Host" button in the upper right. From "Where Is The Service You Want To
@@ -31,3 +45,6 @@ where:
 	```
 
 Original work kindly contributed by @phobologic. Thanks Mike!
+
+
+[1]: https://docs.vividcortex.com/getting-started/off-host-installation/#enabling-performance-schema-on-mysql
