@@ -1,0 +1,17 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# editor and IDE paraphernalia
+.idea
+*.swp
+*.swo
+*~
+
+# Avoid checking in our gcloud credentials
+travis_gcloud_credentials.json
+secrets.json
+.api_token

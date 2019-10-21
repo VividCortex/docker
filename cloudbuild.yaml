@@ -1,0 +1,27 @@
+steps:
+  - id: 'pull-latest'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: '/bin/bash'
+    args:
+      - '-c'
+      - 'docker pull gcr.io/$PROJECT_ID/apps/zendesk-vividcortext:latest || true'
+
+  - id: 'build-image'
+    name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--cache-from=gcr.io/$PROJECT_ID/apps/zendesk-vividcortext:latest'
+      - '--tag=gcr.io/$PROJECT_ID/apps/zendesk-vividcortext:$SHORT_SHA'
+      - '.'
+
+  - id: 'tag-image'
+    name: 'gcr.io/$PROJECT_ID/cloud-builders/tagger'
+    env:
+      - SOURCE_IMAGE=gcr.io/$PROJECT_ID/apps/zendesk-vividcortext:$SHORT_SHA
+      - IMAGE_NAME=gcr.io/$PROJECT_ID/apps/zendesk-vividcortext
+      - BRANCH_NAME=$BRANCH_NAME
+      - TAG_NAME=$TAG_NAME
+      - TAG_NON_MASTER_BRANCH=1
+
+images:
+  - 'gcr.io/$PROJECT_ID/apps/zendesk-vividcortext'

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vividcortex
+  labels:
+    project: zendesk-vividcortex
+    role: zendesk-vividcortex
+    team: dining-philosophers
+spec:
+  selector:
+    matchLabels:
+      project: zendesk-vividcortex
+      role: zendesk-vividcortex
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        secret/VC_API_TOKEN: vc_api_token
+        secret/VC_DRV_MANUAL_HOST_URI: vc_drv_manual_host_uri
+        samson/required_env: >
+          VC_API_TOKEN
+          VC_DRV_MANUAL_HOST_URI
+      labels:
+        project: zendesk-vividcortex
+        role: zendesk-vividcortex
+    spec:
+      containers:
+      - name: vividcortex-agent
+        image: gcr.io/docker-images-180022/apps/zendesk-vividcortex:latest
+        env:
+        - name: VC_HOSTNAME
+          value: zendesk-vividcortex-01
+        - name: VC_DRV_MANUAL_QUERY_CAPTURE
+          value: poll
+        resources:
+          requests:
+            cpu: 2000m
+            memory: 4Gi
+          limits:
+            cpu: 3500m
+            memory: 8Gi
