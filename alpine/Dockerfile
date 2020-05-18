@@ -11,7 +11,7 @@ LABEL app=vividcortex
 ## shell in container: docker exec --interactive --tty vividcortex /bin/sh
 ## REMOVE CONTAINER AND IMAGE: docker rm --force vividcortex; docker rmi --force vcimage
 
-ARG VC_API_TOKEN
+ENV VC_API_TOKEN NO
 
 WORKDIR /
 ENTRYPOINT ["/usr/local/bin/vc-agent-007","-foreground","-forbid-restarts"]
