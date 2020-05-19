@@ -2,13 +2,9 @@ FROM alpine:3.8
 MAINTAINER VividCortex <containers@vividcortex.com>
 LABEL app=vividcortex
 
-# How to build:
-# VC_API_TOKEN can be provided as --build-arg or as --env
-#opt1# build with token: docker build --force-rm --build-arg VC_API_TOKEN=xxxxx -t vcimage https://raw.githubusercontent.com/VividCortex/docker/master/alpine/Dockerfile
-#opt2# build w/o token : docker build --force-rm -t vcimage https://raw.githubusercontent.com/VividCortex/docker/master/alpine/Dockerfile
+# How to use:
+# docker build --force-rm -t vcimage https://raw.githubusercontent.com/VividCortex/docker/master/alpine/Dockerfile
 #
-# How to run:
-# provide VC_API_TOKEN if built w/o
 #opt1# override hostname: docker run --env VC_API_TOKEN=xxxxx --env VC_HOSTNAME=mycontainer --detach --interactive --tty --name=vividcortex vcimage
 #opt2# monitor RDS      : docker run --env VC_API_TOKEN=xxxxx --env VC_HOSTNAME=mycontainer --env VC_DRV_MANUAL_HOST_URI=mysql://user:pass@domain.xyz:3306/db --detach --interactive --tty --name=vividcortex vcimage
 ## docker ps | grep -q vividcortex && echo "success!"
