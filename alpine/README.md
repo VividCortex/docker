@@ -10,7 +10,7 @@ To use, you should build a image for your environment:
 
 To get your API token, open the DPM application, choose the environment in which you'd like to add this host, and select "Add New Host" on the Inventory page. Then click "Containerized," which will display your token. Do not share or store it insecurely.
 
-**You can specify VC_API_TOKEN at build time or run time.** If you do not include `VC_API_TOKEN` as a build argument the container will build without a token. At runtime, you must include it as an environment variable.
+**You can specify VC_API_TOKEN at build time or run time.** This sample code assumes the containter will be built without a token and that the token will be provided as an environment variable at run time.
 
 At this point you should have a repository named "vcimage" in `docker images`.
 
@@ -23,7 +23,7 @@ Now create and start a container for your RDS host:
 	  --detach --interactive --tty --name=vividcortex vcimage
 
 where:
-* `VC_API_TOKEN` is an API token found in the Add New Host wizard, described above. It is required here if not provided when the container is built.
+* `VC_API_TOKEN` is an API token found in the Add New Host wizard, described above.
 * `VC_HOSTNAME`, optional, is a host name to use instead of Docker's random hex one. We strongly recommend that you use this option so that restarting the container will not create a new host in DPM.
 * `VC_DRV_MANUAL_HOST_URI`, optional, is a comma-separated list of database URLs to monitor. You can still add hosts using VividCortex's web app. Database URL format:
 
