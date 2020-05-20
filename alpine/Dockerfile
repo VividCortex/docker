@@ -3,15 +3,15 @@ MAINTAINER VividCortex <containers@vividcortex.com>
 LABEL app=vividcortex
 
 # How to use:
-## docker build --force-rm --build-arg VC_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -t vcimage https://raw.githubusercontent.com/VividCortex/docker/master/alpine/Dockerfile
-#opt1# default hostname : docker run --detach --interactive --tty --name=vividcortex vcimage
-#opt2# override hostname: docker run --env VC_HOSTNAME=mycontainer --detach --interactive --tty --name=vividcortex vcimage
-#opt3# monitor RDS      : docker run --env VC_HOSTNAME=mycontainer --env VC_DRV_MANUAL_HOST_URI=mysql://user:pass@domain.xyz:3306/db --detach --interactive --tty --name=vividcortex vcimage
+# docker build --force-rm -t vcimage https://raw.githubusercontent.com/VividCortex/docker/master/alpine/Dockerfile
+#
+#opt1# override hostname: docker run --env VC_API_TOKEN=xxxxx --env VC_HOSTNAME=mycontainer --detach --interactive --tty --name=vividcortex vcimage
+#opt2# monitor RDS      : docker run --env VC_API_TOKEN=xxxxx --env VC_HOSTNAME=mycontainer --env VC_DRV_MANUAL_HOST_URI=mysql://user:pass@domain.xyz:3306/db --detach --interactive --tty --name=vividcortex vcimage
 ## docker ps | grep -q vividcortex && echo "success!"
 ## shell in container: docker exec --interactive --tty vividcortex /bin/sh
 ## REMOVE CONTAINER AND IMAGE: docker rm --force vividcortex; docker rmi --force vcimage
 
-ARG VC_API_TOKEN
+ENV VC_API_TOKEN NO
 
 WORKDIR /
 ENTRYPOINT ["/usr/local/bin/vc-agent-007","-foreground","-forbid-restarts"]
