@@ -3,16 +3,16 @@
 Runs VividCortex agents in an [Alpine Linux](https://www.alpinelinux.org/) Docker container, for off-host monitoring; see
 [here](https://docs.vividcortex.com/getting-started/off-host-installation/) for more detailis about off-host configuration requirements for your database. More general container installation documentation can be found [here](https://docs.vividcortex.com/getting-started/containerized-installation/).
 
-To use, you should build a image for your environment:
+To use, build a image for your environment:
 
-	docker build --force-rm --build-arg VC_API_TOKEN=xxxxxxxxxxxxxxxx -t vcimage \
+	docker build --force-rm -t vcimage \
 	  https://raw.githubusercontent.com/VividCortex/docker/master/alpine/Dockerfile
 
-To get your API token, open the DPM application, choose the environment in which you'd like to add this host, and select "Add New Host" on the Inventory page. Then click "Containerized," which will display your token. Do not share or store it insecurely.
+At this point you should have a repository named "vcimage" in `docker images`.
 
 **You can specify VC_API_TOKEN at build time or run time.** This sample code assumes the containter will be built without a token and that the token will be provided as an environment variable at run time.
 
-At this point you should have a repository named "vcimage" in `docker images`.
+To get your API token, open the DPM application, choose the environment in which you'd like to add this host, and select "Add New Host" on the Inventory page. Then click "Containerized," which will display your token. Do not share or store it insecurely.
 
 Now create and start a container for your RDS host:
 
