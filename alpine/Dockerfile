@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.12
 MAINTAINER VividCortex <containers@vividcortex.com>
 LABEL app=vividcortex
 
