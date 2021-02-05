@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.13.1
 MAINTAINER VividCortex <containers@vividcortex.com>
 LABEL app=vividcortex
 
@@ -27,6 +27,6 @@ RUN test -n "${VC_API_TOKEN}" && \
     wget https://download.vividcortex.com/install && \
     sh install --token=${VC_API_TOKEN} --batch --init=None --static --proxy=dyn && \
     rm -f install && \
-    sed '1 a "log-max-size":"5",' /etc/vividcortex/global.conf > /etc/vividcortex/tempconf && \
-    sed '1 a "log-max-backups":"1",' /etc/vividcortex/tempconf > /etc/vividcortex/global.conf && \
-    rm -f /etc/vividcortex/tempconf && chmod 600 /etc/vividcortex/global.conf
+    sed -i '1 a "log-max-size":"5",' /etc/vividcortex/global.conf && \
+    sed -i '1 a "log-max-backups":"1",' /etc/vividcortex/global.conf && \
+    chmod 600 /etc/vividcortex/global.conf
