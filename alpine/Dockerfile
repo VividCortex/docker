@@ -14,7 +14,7 @@ LABEL app=vividcortex
 ENV VC_API_TOKEN NO
 
 WORKDIR /
-ENTRYPOINT ["/usr/local/bin/vc-agent-007","-foreground","-forbid-restarts"]
+ENTRYPOINT ["/usr/local/bin/vividcortex/vc-agent-007","-foreground","-forbid-restarts"]
 
 # verify VC_API_TOKEN set
 # openssl for https
