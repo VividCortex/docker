@@ -4,7 +4,7 @@ MAINTAINER VividCortex <containers@vividcortex.com>
 LABEL app=vividcortex
 
 WORKDIR /
-ENTRYPOINT ["/usr/local/bin/vc-agent-007","-foreground","-forbid-restarts"]
+ENTRYPOINT ["/usr/local/bin/vividcortex/vc-agent-007","-foreground","-forbid-restarts"]
 
 ARG VC_API_TOKEN
 
