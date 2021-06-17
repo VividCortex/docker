@@ -1,6 +1,6 @@
-# VividCortex Alpine Docker container
+# DPM Alpine Docker container
 
-Runs VividCortex agents in an [Alpine Linux](https://www.alpinelinux.org/) Docker container, for off-host monitoring; see
+Runs DPM agents in an [Alpine Linux](https://www.alpinelinux.org/) Docker container, for off-host monitoring; see
 [here](https://docs.vividcortex.com/getting-started/off-host-installation/) for more detailis about off-host configuration requirements for your database. More general container installation documentation can be found [here](https://docs.vividcortex.com/getting-started/containerized-installation/).
 
 To use, build a image for your environment:
