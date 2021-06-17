@@ -25,10 +25,5 @@ Now create and start a container for your RDS host:
 where:
 * `VC_API_TOKEN` is an API token found in the Add New Host wizard, described above.
 * `VC_HOSTNAME`, optional, is a host name to use instead of Docker's random hex one. We strongly recommend that you use this option so that restarting the container will not create a new host in DPM.
-* `VC_DRV_MANUAL_HOST_URI`, optional, is a comma-separated list of database URLs to monitor. You can still add hosts using VividCortex's web app. Database URL format:
-
-	```
-	<schema>://[<user>[:<password>]@]<host>:<port>[/<db>][?key1=value1&...]
-	```
-
-Original work kindly contributed by @phobologic. Thanks Mike!
+* `VC_DRV_MANUAL_HOST_URI` is a comma-separated list of database URLs to monitor. For a complete description of host URIs [see our documentation here](https://docs.vividcortex.com/getting-started/advanced-installation/#database-uri); you will use the same format for VC_DRV_MANUAL_HOST_URI.
+* `VC_DRV_MANUAL_QUERY_CAPTURE` is the method the agent will use for monitoring queries. The available query capture methods [are here](https://docs.vividcortex.com/getting-started/advanced-installation/#query-capture-method). It is not currently possible to specify multiple capture methods in a single container; if you have two or database types which do not share a capture method you will need to create two containers, which must run on two different pods (the supervisor agents will conflict otherwise).
