@@ -20,6 +20,7 @@ Now create and start a container for your RDS host:
 	  --env VC_API_TOKEN=xxxxxxxxxxxxxxxx \
 	  --env VC_HOSTNAME=myprettyhostname \
 	  --env VC_DRV_MANUAL_HOST_URI='mysql://user:pass@domain.xyz:3306/db' \
+	  --env VC_DRV_MANUAL_QUERY_CAPTURE=<capture-method>
 	  --detach --interactive --tty --name=vividcortex vcimage
 
 where:
