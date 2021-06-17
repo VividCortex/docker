@@ -1,7 +1,6 @@
-# VividCortex "scratch" Docker container
+# DPM "scratch" Docker container
 
-Runs VividCortex agents in a Docker container, for off-host monitoring (see
-[here](https://docs.vividcortex.com/getting-started/installing/#off-host-monitoring)).
+Runs DPM agents in a Docker container.
 
 To use, you should build a image for your environment:
 
@@ -13,25 +12,19 @@ To use, you should build a image for your environment:
 	cd ..
 	rm -rf vcimage
 
-You can get your API token from the host wizard in VividCortex as follows:
-In your account from the Hosts page add a new host by clicking the "Add New
-Host" button in the upper right. From "Where Is The Service You Want To
-Monitor?" choose the "Containerized" option. From the "Agents API Token" box
-copy the token and close the "Install VividCortex On A New Host" dialog.
+To get your API token, open the DPM application, choose the environment in which you'd like to add this host, and select "Add New Host" on the Inventory page. Then click "Containerized," which will display your token. Do not share or store it insecurely.
 
 At this point you should have a repository named "vcimage" in `docker images`.
 
-Now create and start a container for your RDS host:
+Now create and start a container for your host:
 
 	docker run \
 	  --env VC_HOSTNAME=myprettyhostname \
 	  --env VC_DRV_MANUAL_HOST_URI='mysql://user:pass@domain.xyz:3306/db' \
+	  --env VC_DRV_MANUAL_QUERY_CAPTURE=<capture-method>
 	  --detach --interactive --tty --name=vividcortex vcimage
 
 where:
-* `VC_HOSTNAME`, optional, is a host name to use instead of Docker's random hex one.
-* `VC_DRV_MANUAL_HOST_URI`, optional, is a comma-separated list of database URLs to monitor. You can still add hosts using VividCortex's web app. Database URL format:
-
-	```
-	<schema>://[<user>[:<password>]@]<host>:<port>[/<db>][?key1=value1&...]
-	```
+* `VC_HOSTNAME`, optional, is a host name to use instead of Docker's random hex one. We strongly recommend that you use this option so that restarting the container will not create a new host in DPM.
+* `VC_DRV_MANUAL_HOST_URI` is a comma-separated list of database URLs to monitor. For a complete description of host URIs [see our documentation here](https://docs.vividcortex.com/getting-started/advanced-installation/#database-uri); you will use the same format for VC_DRV_MANUAL_HOST_URI.
+* `VC_DRV_MANUAL_QUERY_CAPTURE` is the method the agent will use for monitoring queries. The available query capture methods [are here](https://docs.vividcortex.com/getting-started/advanced-installation/#query-capture-method). It is not currently possible to specify multiple capture methods in a single container; if you have two or database types which do not share a capture method you will need to create two containers, which must run on two different pods (the supervisor agents will conflict otherwise).
