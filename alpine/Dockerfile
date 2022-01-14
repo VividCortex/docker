@@ -11,8 +11,6 @@ LABEL app=vividcortex
 ## shell in container: docker exec --interactive --tty vividcortex /bin/sh
 ## REMOVE CONTAINER AND IMAGE: docker rm --force vividcortex; docker rmi --force vcimage
 
-ENV VC_API_TOKEN NO
-
 WORKDIR /
 ENTRYPOINT ["/usr/local/bin/vividcortex/vc-agent-007","-foreground","-forbid-restarts"]
 
@@ -21,11 +19,10 @@ ENTRYPOINT ["/usr/local/bin/vividcortex/vc-agent-007","-foreground","-forbid-res
 # download, install
 # cap logs
 
-RUN test -n "${VC_API_TOKEN}" && \
-    apk update && apk add --no-cache openssl ca-certificates wget && \
+RUN apk update && apk add --no-cache openssl ca-certificates wget && \
     rm -f install && \
     wget https://download.vividcortex.com/install && \
-    sh install --token=${VC_API_TOKEN} --batch --init=None --static --proxy=dyn && \
+    sh install --token=${VC_API_TOKEN:?} --batch --init=None --static --proxy=dyn && \
     rm -f install && \
     sed -i '1 a "log-max-size":"5",' /etc/vividcortex/global.conf && \
     sed -i '1 a "log-max-backups":"1",' /etc/vividcortex/global.conf && \
